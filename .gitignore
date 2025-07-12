@@ -1,0 +1,27 @@
+# Logs directory - contains session-specific logs
+logs/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+
+# Environment files (never commit these!)
+.env
+.env.local
+.env.*.local
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor directories
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Temporary files
+*.tmp
+*.temp
