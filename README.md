@@ -18,18 +18,19 @@ A comprehensive hooks system for Claude Code that provides logging, safety featu
    cd my-project
    ```
 
-2. **Run the setup script**:
+2. **Set up the hooks**:
    ```bash
-   ./setup.sh
-   ```
-   
-   Or manually:
-   ```bash
-   # Install uv if needed
+   # Install uv (if not already installed)
    curl -LsSf https://astral.sh/uv/install.sh | sh
    
    # Make hooks executable
    chmod +x .claude/hooks/*.py
+   
+   # Create logs directory
+   mkdir -p logs/sessions
+   
+   # Test hooks are working (optional)
+   echo '{}' | uv run .claude/hooks/pre_tool_use.py && echo "✅ Hooks working!"
    ```
 
 3. **Test the hooks**:
@@ -177,8 +178,8 @@ Claude: I'll help you delete files. Let me...
 - Look for errors in Claude Code output
 
 ### Permission errors
-- Run `./setup.sh` or manually: `chmod +x .claude/hooks/*.py`
-- Check write permissions for logs directory
+- Ensure hooks are executable: `chmod +x .claude/hooks/*.py`
+- Check write permissions for logs directory: `ls -la logs/`
 
 ### Hook errors
 - Hooks output errors to stderr, visible in Claude Code
