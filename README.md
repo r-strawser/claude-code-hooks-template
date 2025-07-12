@@ -70,7 +70,7 @@ For enhanced audio features, set these in your shell:
 export ELEVENLABS_API_KEY="your-key"      # Premium voice synthesis
 export OPENAI_API_KEY="your-key"          # OpenAI TTS
 export ANTHROPIC_API_KEY="your-key"       # Anthropic API
-export CLAUDE_ENGINEER_NAME="Your Name"   # Personalized messages
+export ENGINEER_NAME="Your Name"          # Personalized messages
 ```
 
 ### Customizing Hooks
