@@ -196,7 +196,7 @@ Feel free to submit issues and enhancement requests!
 
 ## Credits
 
-This project is based on the original Claude Code hooks implementation, with enhancements added for improved session management, safety features, and logging capabilities.
+This project is based on the original [claude-code-hooks-mastery](https://github.com/disler/claude-code-hooks-mastery) template by disler, with enhancements added for improved session management, safety features, and logging capabilities.
 
 ## License
 
