@@ -1,0 +1,63 @@
+# Project Instructions for Claude Code
+
+This is an example CLAUDE.md file. Copy this to CLAUDE.md and customize for your project.
+
+## Project Overview
+
+[Describe your project here - what it does, key technologies, architecture]
+
+## Important Guidelines
+
+[Add project-specific rules and patterns Claude should follow]
+
+### Code Style
+- [Language-specific conventions]
+- [Naming patterns]
+- [File organization]
+
+### Testing
+- Run tests with: `[your test command]`
+- Test files are located in: `[test directory]`
+- Coverage requirements: [if any]
+
+### Build & Deploy
+- Build command: `[build command]`
+- Deploy process: [describe]
+
+## Project Structure
+
+```
+src/
+├── components/    # [describe]
+├── utils/        # [describe]
+└── ...
+```
+
+## Key Files
+
+- `[important file]` - [what it does]
+- `[config file]` - [purpose]
+
+## Common Tasks
+
+### Adding a new feature
+1. [Step 1]
+2. [Step 2]
+
+### Debugging
+- [Debugging tips]
+- [Common issues]
+
+## Dependencies
+
+- [Key dependency] - [why it's used]
+- [Another dependency] - [purpose]
+
+## Notes
+
+- [Any special considerations]
+- [Known issues or limitations]
+
+---
+
+Remember: This file helps Claude understand your project better. Keep it updated!

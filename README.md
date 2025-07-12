@@ -18,9 +18,18 @@ A comprehensive hooks system for Claude Code that provides logging, safety featu
    cd my-project
    ```
 
-2. **Install uv** (if not already installed):
+2. **Run the setup script**:
    ```bash
+   ./setup.sh
+   ```
+   
+   Or manually:
+   ```bash
+   # Install uv if needed
    curl -LsSf https://astral.sh/uv/install.sh | sh
+   
+   # Make hooks executable
+   chmod +x .claude/hooks/*.py
    ```
 
 3. **Test the hooks**:
@@ -28,6 +37,12 @@ A comprehensive hooks system for Claude Code that provides logging, safety featu
    # The hooks will activate automatically when using Claude Code
    # Check logs were created:
    ls -la logs/sessions/
+   ```
+
+4. **(Optional) Create CLAUDE.md**:
+   ```bash
+   cp CLAUDE.md.example CLAUDE.md
+   # Edit CLAUDE.md with your project-specific instructions
    ```
 
 ## What's Included
@@ -127,6 +142,33 @@ mv .claude/settings.json.disabled .claude/settings.json
 
 4. **Graceful Failures**: Hooks fail silently to not interrupt Claude Code
 
+## Examples
+
+### Example: Dangerous Command Blocked
+```
+User: Delete all files in the system
+Claude: I'll help you delete files. Let me...
+[BLOCKED: Dangerous rm command detected and prevented]
+```
+
+### Example: Session Logs
+```json
+// logs/sessions/{id}/chat.json
+{
+  "conversation": [
+    {
+      "role": "user", 
+      "content": "Help me refactor this function"
+    },
+    {
+      "role": "assistant",
+      "content": "I'll help you refactor...",
+      "tool_calls": [...]
+    }
+  ]
+}
+```
+
 ## Troubleshooting
 
 ### Logs not appearing
@@ -135,7 +177,7 @@ mv .claude/settings.json.disabled .claude/settings.json
 - Look for errors in Claude Code output
 
 ### Permission errors
-- Ensure hook scripts are executable: `chmod +x .claude/hooks/*.py`
+- Run `./setup.sh` or manually: `chmod +x .claude/hooks/*.py`
 - Check write permissions for logs directory
 
 ### Hook errors
@@ -143,9 +185,17 @@ mv .claude/settings.json.disabled .claude/settings.json
 - Check Python syntax in hook files
 - Verify JSON format in settings.json
 
+### "Hook test failed" during setup
+- Ensure Python 3.8+ is available
+- Try running a hook directly: `uv run .claude/hooks/pre_tool_use.py --version`
+
 ## Contributing
 
 Feel free to submit issues and enhancement requests!
+
+## Credits
+
+This project is based on the original Claude Code hooks implementation, with enhancements added for improved session management, safety features, and logging capabilities.
 
 ## License
 
