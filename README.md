@@ -10,6 +10,16 @@ A comprehensive hooks system for Claude Code that provides logging, safety featu
 - 🚀 **Parallel Sessions** - Multiple Claude Code sessions without conflicts
 - 📍 **Works Everywhere** - Edit files anywhere, logs stay in project directory
 
+## Prerequisites
+
+Before using this template, ensure you have:
+
+- **Claude Code** - The official Claude CLI tool ([installation guide](https://docs.anthropic.com/en/docs/claude-code/quickstart))
+- **Python 3.8+** - Required for running hook scripts
+- **uv** - Fast Python package installer (installed during setup)
+- **Git** - For version control and cloning the template
+- **Unix-like environment** - macOS, Linux, or WSL on Windows
+
 ## Quick Start
 
 1. **Clone this template**:
@@ -48,12 +58,61 @@ A comprehensive hooks system for Claude Code that provides logging, safety featu
 
 ## What's Included
 
-### Hooks
-- **PreToolUse** - Validates and blocks dangerous operations
-- **PostToolUse** - Logs all tool results
-- **Stop** - Creates session transcript, plays completion sound
-- **Notification** - Alerts when Claude needs input
-- **SubagentStop** - Tracks subagent completion
+### Understanding Claude Code Hooks
+
+Hooks are Python scripts that run at specific points during Claude Code's execution. They enable you to extend Claude Code's functionality without modifying its core behavior. Each hook receives event data as JSON via stdin and can perform custom actions.
+
+### Available Hooks
+
+#### 1. **PreToolUse** (`pre_tool_use.py`)
+- **Trigger**: Before any tool (Bash, Edit, Write, etc.) is executed
+- **Purpose**: Validate and potentially block dangerous operations
+- **Features**:
+  - Blocks destructive commands (e.g., `rm -rf /`, `dd if=/dev/zero`)
+  - Prevents access to sensitive files (`.env`, private keys)
+  - Logs all attempted tool usage
+  - Can modify or reject tool parameters
+- **Use Cases**: Security enforcement, command validation, audit logging
+
+#### 2. **PostToolUse** (`post_tool_use.py`)
+- **Trigger**: After a tool completes execution
+- **Purpose**: Log results and perform post-processing
+- **Features**:
+  - Records tool outputs and execution results
+  - Captures error messages and exit codes
+  - Maintains activity timestamps
+  - Can trigger notifications on specific outcomes
+- **Use Cases**: Debugging, audit trails, error monitoring
+
+#### 3. **Stop** (`stop.py`)
+- **Trigger**: When a Claude Code session ends
+- **Purpose**: Cleanup and session finalization
+- **Features**:
+  - Creates complete session transcript
+  - Plays completion sound (optional)
+  - Generates session summary
+  - Archives logs for future reference
+- **Use Cases**: Session archival, time tracking, notifications
+
+#### 4. **Notification** (`notification.py`)
+- **Trigger**: When Claude needs user input or attention
+- **Purpose**: Alert users to required actions
+- **Features**:
+  - Desktop notifications (system-dependent)
+  - Audio alerts via TTS APIs
+  - Custom notification messages
+  - Priority-based alerting
+- **Use Cases**: Long-running tasks, error alerts, completion notices
+
+#### 5. **SubagentStop** (`subagent_stop.py`)
+- **Trigger**: When a subagent completes its task
+- **Purpose**: Track nested agent operations
+- **Features**:
+  - Logs subagent results
+  - Tracks execution hierarchy
+  - Maintains parent-child relationships
+  - Performance metrics
+- **Use Cases**: Complex workflows, performance analysis, debugging
 
 ### Safety Features
 - Blocks `rm -rf` and similar destructive commands
@@ -192,7 +251,27 @@ Claude: I'll help you delete files. Let me...
 
 ## Contributing
 
-Feel free to submit issues and enhancement requests!
+Please see our [Contributing Guidelines](CONTRIBUTING.md) for details on how to contribute to this project.
+
+## Resources
+
+### Official Documentation
+- [Claude Code Documentation](https://docs.anthropic.com/en/docs/claude-code) - Official Claude Code docs
+- [Claude Code Hooks](https://docs.anthropic.com/en/docs/claude-code/hooks) - Detailed hooks documentation
+- [Claude Code Settings](https://docs.anthropic.com/en/docs/claude-code/settings) - Configuration and settings reference
+
+### Related Projects
+- [Original claude-code-hooks-mastery](https://github.com/disler/claude-code-hooks-mastery) - The original template this project builds upon
+- [Claude Code GitHub](https://github.com/anthropics/claude-code) - Official Claude Code repository
+
+### Community Resources
+- [Claude Code Issues](https://github.com/anthropics/claude-code/issues) - Report bugs and request features
+- [Anthropic Discord](https://discord.gg/anthropic) - Community support and discussions
+
+### Learning Resources
+- [Python subprocess documentation](https://docs.python.org/3/library/subprocess.html) - For understanding hook execution
+- [JSON Schema](https://json-schema.org/) - For understanding settings.json structure
+- [uv Documentation](https://github.com/astral-sh/uv) - Fast Python package installer used by hooks
 
 ## Credits
 
