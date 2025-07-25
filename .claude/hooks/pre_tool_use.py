@@ -110,19 +110,21 @@ def main():
         session_id = input_data.get('session_id', 'unknown')
         
         # Check for .env file access (blocks access to sensitive environment files)
-        if is_env_file_access(tool_name, tool_input):
-            print("BLOCKED: Access to .env files containing sensitive data is prohibited", file=sys.stderr)
-            print("Use .env.sample for template files instead", file=sys.stderr)
-            sys.exit(2)  # Exit code 2 blocks tool call and shows error to Claude
+        # COMMENTED OUT: Blocking disabled per user request
+        # if is_env_file_access(tool_name, tool_input):
+        #     print("BLOCKED: Access to .env files containing sensitive data is prohibited", file=sys.stderr)
+        #     print("Use .env.sample for template files instead", file=sys.stderr)
+        #     sys.exit(2)  # Exit code 2 blocks tool call and shows error to Claude
         
         # Check for dangerous rm -rf commands
-        if tool_name == 'Bash':
-            command = tool_input.get('command', '')
-            
-            # Block rm -rf commands with comprehensive pattern matching
-            if is_dangerous_rm_command(command):
-                print("BLOCKED: Dangerous rm command detected and prevented", file=sys.stderr)
-                sys.exit(2)  # Exit code 2 blocks tool call and shows error to Claude
+        # COMMENTED OUT: Blocking disabled per user request
+        # if tool_name == 'Bash':
+        #     command = tool_input.get('command', '')
+        #     
+        #     # Block rm -rf commands with comprehensive pattern matching
+        #     if is_dangerous_rm_command(command):
+        #         print("BLOCKED: Dangerous rm command detected and prevented", file=sys.stderr)
+        #         sys.exit(2)  # Exit code 2 blocks tool call and shows error to Claude
         
         # Get session-specific log directory
         session_log_dir = get_session_log_dir(session_id)
